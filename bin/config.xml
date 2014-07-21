@@ -1,40 +1,28 @@
 <config>
 
 	<input>
-		<rootIn file="qa.root" />
-		<dataDir maxFiles="1" >/star/institutions</dataDir>
-		<maxFiles>1</maxFiles>
+		<dataDir maxFiles="100" >/star/institutions/rice/jdb/run14/auau15/rcp/data/output/</dataDir>
 	</input>
-	<array hide="true">
-		<dates index="vv">
-			<vv>                                  12-12-02</vv>
-			<vv>13-12-01</vv>
-			<vv>13-12-03</vv>
-			<vv>13-12-04</vv>
-		</dates>
-		
-		<tries>
-			<another>
-				<deep>
-					<v>1</v>
-					<v>2</v>
-					<v>3</v>
-				</deep>
-			</another>
-		</tries>
-		
-		<more></more>
-		<four>exists</four>
-	</array>
-
-	<dan>
-	adada
-	</dan>
-
-	<test>wrwerw</test>
-
-	<style>
-		<s1 draw="colz" logY="1" range="0, 6" domain="0, 100" />
+	<output>
+		<base></base>
+		<root>qa.root</root>
+		<report>rqa.pdf</report>
+	</output>
+	
+	<h hide="true">
+		<eventsByRun type="1D" title="#Events by run; run# ; #Events" nBinsX="3000" x1="0" x2="3000" />
+		<refMultByRun type="1D" title="RefMult by run; run# ; refMult" nBinsX="3000" x1="0" x2="3000" />
+		<refMultAll type="1D" title="RefMult ; refMult ; #Events" nBinsX="350" x1="0" x2="350" />
+		<refMultRun type="1D" title="RefMult ; refMult ; #Events" nBinsX="350" x1="0" x2="350" />
+	</h>
+	<style hide="true">
+		<log1D draw="h" logY="1" />
+		<refMultAvg draw="pe" linecolor="2" logY="0" markerstyle="10" />
 	</style>
+
+	<cut>
+		<vz min="-5" max="5"  />
+		<vrMax>2</vrMax>
+	</cut>
 
 </config>

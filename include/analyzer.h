@@ -32,7 +32,7 @@ public:
 	analyzer( TChain * chain, xmlConfig *config );
 
 	// destructor
-	~analyzer();
+	virtual ~analyzer();
 
 	void loopEvents();
 

@@ -1,10 +1,10 @@
 
 # project name and executable name
-project = app
+project = refMult
 # source suffix
 source = .cpp 
 # object files to make
-objects = app.o histoBook.o chainLoader.o analyzer.o reporter.o utils.o
+objects = app.o histoBook.o chainLoader.o analyzer.o reporter.o utils.o refMultAna.o TOFrPicoDst.o
 
 sources = $(wildcard *.cpp)
 headers = $(wildcard ../include/*.h)

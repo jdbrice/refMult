@@ -4,48 +4,27 @@
 #include "constants.h"
 #include "histoBook.h"
 #include "xmlConfig.h"
-
-/* 
-*
-*	GUI Application
-*
-*/
-/*
-int main(int argc, char* argv[]) {
-
-  TApplication* rootapp = new TApplication("example",&argc, argv);
-
-  TRandom1* myrand = new TRandom1();
-  TH1F* myhist = new TH1F("stats","",100,0,10);
-  for(int i=0;i<10000;++i) {
-    myhist->Fill(myrand->Gaus(5,1));
-  }
-  myhist->Draw();
-  rootapp->Run();
-  return 0;
-}
-*/
+#include "chainLoader.h"
+#include "refMultAna.h"
 
 int main( int argc, char* argv[] ) {
 
-	cout << "const: " << Constants::nChannels << endl;
-  if ( argc >= 2 ){
-    xmlConfig config( argv[ 1 ] );
-    config.report();
-    
-    cout << "file: " << config.getString( "input.rootIn:file" ) << endl;
-    
-    histoBook* book = new histoBook( "out.root", config.getString( "input.rootIn:file" ) );
-
-    book->set( &config, "style.s1" );
-    book->set( "legend", "help", "lpf" );
-    //book->set( "hello", vector<string>( {"1", "2"} ) ) ;
-
-    delete book;
-    
-
+  if ( argc <= 1 ){
+    cout << " call with config.xml file" << endl;
+    return 0;
   }
+  xmlConfig config( argv[ 1 ] );
+  config.report();
 
+  TChain* chain = new TChain( "tof" );
+  chainLoader::load( chain, config.getString( "input.dataDir" ).c_str(), config.getInt( "input.dataDir:maxFiles" ) );
+
+
+  refMultAna * rma = new refMultAna( chain, &config );
+
+  rma->loopEvents();
+
+  delete rma;
 
 	return 0;
 }
